@@ -1,0 +1,21 @@
+.ibm__ngv_main {
+    display: flex;
+    background-image: url(../assets/images/background.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex: 1 1 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.ibm__text-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 4rem;
+    align-self: flex-end;
+}
+
+.ibm__label {
+    color: white;
+}

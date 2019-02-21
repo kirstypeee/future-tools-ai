@@ -1,0 +1,9 @@
+applications:
+- name: future-tools
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  command: yarn start
+  memory: 1GB
+  timeout: 120
+  env:
+    NODE_ENV: production
+    API_ENDPOINT: https://future-tools-content.au-syd.mybluemix.net
