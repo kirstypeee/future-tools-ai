@@ -2,6 +2,7 @@ import * as React from 'react';
 import './photo.css';
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
+import history from 'src/history';
 
 interface IProps {
     classify: (imgFile: any) => any;
@@ -24,6 +25,7 @@ class PhotoCapture extends React.Component<IProps, {}> {
 
     private onTakePhoto = (dataUri: any) => {
         this.props.classify(dataUri);
+        history.push('/map');
     }
 }
 

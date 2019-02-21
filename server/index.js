@@ -47,32 +47,57 @@ function parseBase64Image(imageString) {
 }
 
 
-app.use('/classify', (req, res) => {
-    var resource = parseBase64Image(req.body.image_data);
-    var temp = path.join(os.tmpdir(), uuid.v1() + '.' + resource.type);
-    fs.writeFileSync(temp, resource.data);
-    const images_file = fs.createReadStream(temp);
+app.use('/classify', async (req, res) => {
+    const imgData = req.body.image_data;
 
     const visualRecognition = new VisualRecognitionV3({
         version: '2018-03-19',
         iam_apikey: '7XOsdrQO6q05QoX8eBIPDx1Od9meyT6H_0Vz7iG90D-c'
     });
 
-    var params = {
-        images_file,
-        owners: ['me', 'IBM']
-    };
+    const promises = [];
 
-    visualRecognition.classify(params, (err, response) => {
-        if (err) {
-            console.log(err);
-            res.send(err);
-        } else {
-            console.log(JSON.stringify(response, null, 2))
-            res.send(response);
-        }
+    const classify = new Promise((resolve, reject) => {
+        const resource = parseBase64Image(imgData);
+        const temp = path.join(os.tmpdir(), uuid.v1() + '.' + resource.type);
+        fs.writeFileSync(temp, resource.data);
+        const images_file = fs.createReadStream(temp);
+        visualRecognition.classify({ images_file, owners: ['me'] }, (err, response) => {
+            if (err) {
+                console.log('err');
+                res.send(err);
+                reject(err);
+            } else {
+                resolve(response);
+            }
+        });
     });
-})
+
+    const detectFaces = new Promise((resolve, reject) => {
+        const resource = parseBase64Image(imgData);
+        const temp = path.join(os.tmpdir(), uuid.v1() + '.' + resource.type);
+        fs.writeFileSync(temp, resource.data);
+        const images_file = fs.createReadStream(temp);
+        visualRecognition.detectFaces({ images_file }, (err, response) => {
+            if (err) {
+                console.log('err');
+                res.send(err);
+                reject(err);
+            } else {
+                resolve(response);
+            }
+        });
+    });
+
+    Promise.all([classify, detectFaces]).then((values) => {
+        const payload = {
+            classify: values[0].images[0].classifiers,
+            faces: values[1].images[0].faces[0]
+        }
+
+        res.send(payload);
+    })
+});
 
 // Require HTTPS
 if (process.env.NODE_ENV === 'production') {

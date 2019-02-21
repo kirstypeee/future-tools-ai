@@ -1,11 +1,9 @@
-import { IStoreState, IBanner } from 'src/types';
+import { IStoreState } from 'src/types';
 
 const initialState: IStoreState = {
   router: {},
-  tiles: [],
-  banner: {} as IBanner,
   loading: true,
-  forms: []
+  classification: null
 };
 
 export default initialState;

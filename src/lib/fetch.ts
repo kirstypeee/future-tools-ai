@@ -8,7 +8,6 @@ export function configure(logoutAction: () => void) {
 }
 
 export async function call(url: string, method: HTTP_METHOD = 'GET', body: any, headers: any = {}) {
-    console.log(body);
     const result = await fetch(url, {
         method,
         body: body && JSON.stringify(body),

@@ -64,7 +64,7 @@ class Home extends React.Component<IProps, IState> {
 
     private submitName = (event: any) => {
        console.log('submit');
-       history.push('/register');
+       history.push('/photo');
     };
 }
 
