@@ -3,8 +3,11 @@ import './home.css';
 import TextField from '@material-ui/core/TextField';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import history from 'src/history';
+import { stickMan } from './stickman';
 
-interface IProps { }
+interface IProps {
+    setName: (name: string) => any;
+}
 
 interface IState {
     name: string;
@@ -12,17 +15,17 @@ interface IState {
 
 const theme = createMuiTheme({
     palette: {
-        type: 'dark',
+        type: 'light',
         primary: {
-            light: '#fff',
-            main: '#fff'
+            light: '#4a4a4a',
+            main: '#4a4a4a'
         },
         secondary: {
-            light: '#fff',
-            main: '#fff'
+            light: '#4a4a4a',
+            main: '#4a4a4a'
         },
         text: {
-            primary: '#fff',
+            primary: '#4a4a4a',
         }
     }
 });
@@ -39,7 +42,9 @@ class Home extends React.Component<IProps, IState> {
 
         return (
             <div className="ibm__ngv_main">
-                <form className="ibm__text-wrapper" onSubmit={this.submitName}>
+                <div className="ibm__large-text" id="animated-text">hello, {this.state.name}</div>
+                {stickMan()}
+                <form className="ibm__text-wrapper" id="animated-form" onSubmit={this.submitName}>
                     <div className="ibm__label">Enter name to continue...</div>
                     <MuiThemeProvider theme={theme}>
                         <TextField
@@ -63,9 +68,29 @@ class Home extends React.Component<IProps, IState> {
     };
 
     private submitName = (event: any) => {
-       console.log('submit');
-       history.push('/photo');
+        event.preventDefault();
+        this.props.setName(this.state.name);
+        const stickman = document.getElementById('stickman') as HTMLElement;
+        const text = document.getElementById('animated-text') as HTMLElement;
+        const input = document.getElementById('animated-form') as HTMLElement;
+        stickman.classList.add('walk', 'in');
+        setTimeout(() => {
+            stickman.classList.remove('walk', 'in');
+            stickman.classList.add('wave');
+        }, 5000);
+        setTimeout(() => {
+            stickman.classList.remove('wave')
+            stickman.classList.add('walk', 'static');
+            text.classList.add('move', 'out');
+            input.classList.add('move', 'out');
+        }, 7000);
+        setTimeout(() => {
+            stickman.classList.remove('static')
+            stickman.classList.add('out');
+        }, 12000);
+        setTimeout(() => history.push('/photo'), 17000);
     };
 }
 
 export default Home;
+

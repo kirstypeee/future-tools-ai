@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif');
 * {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'IBM Plex Sans Condensed', 'Helvetica', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #4a4a4a;
 }
 
 #root {
@@ -11,4 +12,17 @@
   align-items: stretch;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.ibm__large-text {
+  font-size: 10vmax;
+  text-transform: lowercase;
+  background-color: #f4f4f4;
+  z-index: 2;
+}
+
+.ibm__med-text {
+  font-size: 5vmax;
+  padding: 7vmax;
+  text-align: center;
 }

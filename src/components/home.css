@@ -1,21 +1,200 @@
 .ibm__ngv_main {
     display: flex;
-    background-image: url(../assets/images/background.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex: 1 1 100%;
+    background-color: #f4f4f4;
+    flex: 1 0 100%;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    transition: transform 1000ms ease-in-out;
 }
 
 .ibm__text-wrapper {
     display: flex;
     flex-direction: column;
-    padding-bottom: 4rem;
-    align-self: flex-end;
+    padding: 4rem 0;
 }
 
 .ibm__label {
-    color: white;
+    color: #4a4a4a;
+}
+
+.stickman {
+    position: absolute;
+    top: 15%;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 4rem;
+    transform: translateX(-52vw);
+    z-index: 1;
+}
+
+.stickman * {
+    transform: all ease 0.3s;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: #4a4a4a;
+    border-radius: 50%;
+}
+
+.eye {
+    height: 0.25rem;
+    width: 0.25rem;
+    background-color: #f4f4f4;
+    border-radius: 50%;
+}
+
+.body {
+    height: 1.25rem;
+    background-color: #4a4a4a;
+    width: 5px;
+    border-radius: 30%;
+}
+
+.upper-body {
+    display: flex;
+}
+
+.arm {
+    height: 1rem;
+    background-color: #4a4a4a;
+    width: 5px;
+    border-radius: 30%;
+}
+
+.leg {
+    height: 1.5rem;
+    background-color: #4a4a4a;
+    width: 5px;
+    border-radius: 30%;
+}
+
+#left {
+    transform: rotate(30deg);
+    transform-origin: top;
+}
+
+#right {
+    transform: rotate(-30deg);
+    transform-origin: top;
+}
+
+.shadow {
+    margin-top: 1px;
+    height: 4px;
+    width: 25px;
+    background-color: #4a4a4a;
+    opacity: 0.5;
+    border-radius: 50%;
+}
+
+.walk .shadow {
+    animation: shadow 0.5s ease-in-out infinite alternate;
+    animation-delay: .25s;
+}
+
+.wave {
+    transform: translateX(0);
+}
+
+.wave .arm#right {
+    animation: wave 2s ease-in-out infinite;
+}
+
+.stickman.walk.in {
+    animation: move-in 5s ease-in-out;
+}
+
+.stickman.walk.out {
+    animation: walk-out 5s ease-in-out;
+}
+
+.stickman.static {
+    transform: translateX(0);
+}
+
+.stickman.walk .eye:first-of-type {
+    opacity: 0;
+}
+
+.move.out {
+    animation: move-out 10s ease-in-out;
+}
+
+.walk #left {
+    animation: walk 1s ease-in-out infinite;
+}
+
+.walk #right {
+    animation: walk 1s ease-in-out infinite;
+    animation-delay: .5s;
+}
+
+@keyframes wave {
+    0% {
+        transform: rotate(-30deg);
+    }
+    50% {
+        transform: rotate(-80deg);
+    }
+    100% {
+        transform: rotate(-30deg);
+    }
+}
+
+@keyframes walk {
+    0% {
+        transform: rotate(-30deg);
+    }
+    50% {
+        transform: rotate(30deg);
+    }
+    100% {
+        transform: rotate(-30deg);
+    }
+}
+
+@keyframes shadow {
+    0% {
+        width: 25px;
+    }
+    100% {
+        width: 20px;
+    }
+}
+
+@keyframes move-in {
+    0% {
+        transform: translateX(-52vw);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes walk-out {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(52vw);
+    }
+}
+
+@keyframes move-out {
+    0% {
+        transform: translateX(0vw);
+    }
+    100% {
+        transform: translateX(-100vw);
+    }
 }
