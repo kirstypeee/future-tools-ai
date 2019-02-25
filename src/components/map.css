@@ -1,3 +1,35 @@
 .ibm__result-text {
-    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ibm__user-image {
+    display: flex;
+    border: 10px solid #4a4a4a;
+    border-radius: 50%;
+    height: 40vh;
+    width: 40vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.ibm__user-picture-label {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.ibm__user-name {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.ibm__user-age {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
 }

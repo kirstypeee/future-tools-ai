@@ -8,6 +8,7 @@ import { stickMan } from './stickman';
 
 interface IProps {
     classify: (imgFile: any) => any;
+    saveData: (data: string) => any;
 }
 
 interface IState {
@@ -89,12 +90,17 @@ class PhotoCapture extends React.Component<IProps, IState> {
 
     private onTakePhoto = (dataUri: any) => {
         this.props.classify(dataUri);
+        this.props.saveData(dataUri)
         const stickman = document.getElementById('stickman') as HTMLElement;
         const input = document.getElementById('animated-form') as HTMLElement;
         stickman.classList.remove('wave')
         stickman.classList.add('walk', 'static');
         input.classList.add('move', 'out');
-        setTimeout(() => history.push('/map'), 5000);
+        setTimeout(() => {
+            stickman.classList.remove('static')
+            stickman.classList.add('out');
+        }, 5000);
+        setTimeout(() => history.push('/map'), 10000);
     }
 }
 export default PhotoCapture;

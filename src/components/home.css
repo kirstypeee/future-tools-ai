@@ -20,7 +20,7 @@
 
 .stickman {
     position: absolute;
-    top: 15%;
+    top: 1vh;
     display: flex;
     flex: none;
     flex-direction: column;
@@ -106,7 +106,7 @@
 }
 
 .wave .arm#right {
-    animation: wave 2s ease-in-out infinite;
+    animation: wave 1s ease-in-out infinite;
 }
 
 .stickman.walk.in {
