@@ -13,7 +13,7 @@ function loading(state = {}, action: any): any {
             return { ...state, img: action.payload };
             //return userData;
         default:
-            return state;
+            return {};
     }
 }
 

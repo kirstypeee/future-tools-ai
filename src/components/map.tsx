@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './map.css';
 import posed from 'react-pose';
+import { traits } from '../assets/data/traits';
 
 interface IProps {
     classification: any;
@@ -8,9 +9,26 @@ interface IProps {
     user: any;
 }
 
-const Text = posed.div({
+const Results = posed.div({
     enter: { opacity: 1 },
     exit: { opacity: 0 }
+});
+
+const Pill = posed.div({
+    enter: {
+        opacity: 1,
+        transition: {
+            type: 'physics',
+            delay: 400
+        }
+    },
+    exit: {
+        opacity: 0,
+        transition: {
+            type: 'physics',
+            delay: 400
+        }
+    }
 });
 
 class Map extends React.Component<IProps, {}> {
@@ -34,6 +52,38 @@ class Map extends React.Component<IProps, {}> {
                             <div className="ibm__user-age">{classification.gender}</div>
                             <div className="ibm__user-age">{classification.minAge} - {classification.maxAge}</div>
                         </div>
+                        {
+                            Object.keys(classification).map((key: any) => {
+                                const senitiments = traits[key];
+                                const level = classification[key];
+                                if (senitiments && senitiments[level]) {
+                                    return senitiments[level].map((senitiment: string) =>
+                                        (<Pill className="ibm__results-pill">
+                                            {senitiment}
+                                            <div className="ibm__yes-no-wrapper">
+                                                <div className="ibm__no-button">
+                                                    <i className="material-icons">close</i>
+                                                </div>
+                                                <div className="ibm__yes-button">
+                                                    <i className="material-icons">check</i>
+                                                </div>
+                                            </div>
+                                        </Pill>)
+                                    )
+                                }
+                            })
+                        }
+                        <Pill className="ibm__results-pill" style={{ top: '40rem', right: '3rem', left: 'auto' }}>
+                            {`I like to wear ${classification.clothing} clothing.`}
+                            <div className="ibm__yes-no-wrapper">
+                                <div className="ibm__no-button">
+                                    <i className="material-icons">close</i>
+                                </div>
+                                <div className="ibm__yes-button">
+                                    <i className="material-icons">check</i>
+                                </div>
+                            </div>
+                        </Pill>
                     </Results>}
             </div>
         )
