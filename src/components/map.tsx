@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './map.css';
-import { stickMan } from './stickman';
 import posed from 'react-pose';
 
 interface IProps {
@@ -9,47 +8,24 @@ interface IProps {
     user: any;
 }
 
-interface IState {
-    static: boolean;
-}
-
-const Results = posed.div({
-    enter: {
-        x: 0,
-        opacity: 1,
-        transition:
-            ({ from, to }: any) => ({
-                type: 'keyframes',
-                values: [1000, to],
-                times: [0, 1],
-                duration: 7000
-            })
-    },
-    exit: {
-        x: -1000,
-        opacity: 0,
-        transition: { duration: 1000 }
-    }
+const Text = posed.div({
+    enter: { opacity: 1 },
+    exit: { opacity: 0 }
 });
 
-class Map extends React.Component<IProps, IState> {
-    constructor(props: IProps) {
-        super(props);
-        this.state = {
-            static: false
-        }
-    }
-
-    public componentDidMount() {
-        setTimeout(() => this.setState({ static: true }), 5000);
-    }
+class Map extends React.Component<IProps, {}> {
 
     public render() {
         const { loading, classification, user } = this.props;
         return (
             <div className="ibm__ngv_main">
                 {loading || !classification ?
-                    stickMan(`${this.state.static ? 'static walk' : 'walk in'}`)
+                    <h1 className="ibm__result-text">
+                        <div className="spinner">
+                            <div className="double-bounce1"></div>
+                            <div className="double-bounce2"></div>
+                        </div>
+                    </h1>
                     :
                     <Results className="ibm__result-text">
                         <img className="ibm__user-image" style={{ backgroundImage: `url(${user.img})` }} />

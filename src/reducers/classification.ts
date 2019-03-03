@@ -17,6 +17,7 @@ function classification(state = null, action: any): any {
 }
 
 function formatPayload(payload: any) {
+  console.log("PAYLOAD: ", payload);
   const formattedPayload = {
     minAge: payload.faces.age.min,
     maxAge: payload.faces.age.max,
@@ -31,11 +32,17 @@ function formatPayload(payload: any) {
 }
 
 function formatClass(value: string) {
+  const classification = value.split('_').pop() as string;
   if (/\d/.test(value)) {
     const numberS = value.replace(/^\D+/g, '');
     const number = parseInt(numberS);
     return (number / 7) * 100;
-  } else {
+  } if (classification.includes('high')) {
+    return 'high';
+  } if (classification.includes('low')) {
+    return 'low';
+  }
+  else {
     return value;
   }
 }

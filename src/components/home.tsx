@@ -3,7 +3,7 @@ import './home.css';
 import TextField from '@material-ui/core/TextField';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import history from 'src/history';
-import { stickMan } from './stickman';
+//import { stickMan } from './stickman';
 
 interface IProps {
     setName: (name: string) => any;
@@ -43,7 +43,6 @@ class Home extends React.Component<IProps, IState> {
         return (
             <div className="ibm__ngv_main">
                 <div className="ibm__large-text" id="animated-text">hello, {this.state.name}</div>
-                {stickMan()}
                 <form className="ibm__text-wrapper" id="animated-form" onSubmit={this.submitName}>
                     <div className="ibm__label">Enter name to continue...</div>
                     <MuiThemeProvider theme={theme}>
@@ -70,7 +69,7 @@ class Home extends React.Component<IProps, IState> {
     private submitName = (event: any) => {
         event.preventDefault();
         this.props.setName(this.state.name);
-        const stickman = document.getElementById('stickman') as HTMLElement;
+        /*const stickman = document.getElementById('stickman') as HTMLElement;
         const text = document.getElementById('animated-text') as HTMLElement;
         const input = document.getElementById('animated-form') as HTMLElement;
         stickman.classList.add('walk', 'in');
@@ -87,8 +86,8 @@ class Home extends React.Component<IProps, IState> {
         setTimeout(() => {
             stickman.classList.remove('static')
             stickman.classList.add('out');
-        }, 12000);
-        setTimeout(() => history.push('/photo'), 17000);
+        }, 12000);*/
+        history.push('/photo');
     };
 }
 

@@ -4,7 +4,7 @@ import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import history from 'src/history';
 import posed, { PoseGroup } from 'react-pose';
-import { stickMan } from './stickman';
+//import { stickMan } from './stickman';
 
 interface IProps {
     classify: (imgFile: any) => any;
@@ -18,40 +18,14 @@ interface IState {
 }
 
 const Text = posed.div({
-    enter: {
-        x: 0,
-        opacity: 1,
-        transition:
-            ({ from, to }: any) => ({
-                type: 'keyframes',
-                values: [1000, to],
-                times: [0, 1],
-                duration: 7000
-            })
-    },
-    exit: {
-        x: -1000,
-        opacity: 0,
-        transition: { duration: 1000 }
-    }
-});
+    enter: { opacity: 1 },
+    exit: { opacity: 0 }
+  });
 
 const Photo = posed.div({
-    enter: {
-        x: 0,
-        transition:
-            ({ from, to }: any) => ({
-                type: 'keyframes',
-                values: [1000, to],
-                times: [0, 1],
-                duration: 3000
-            })
-    },
-    exit: {
-        x: -1000,
-        transition: { duration: 1000 }
-    }
-});
+    enter: { opacity: 1 },
+    exit: { opacity: 0 }
+  });
 
 class PhotoCapture extends React.Component<IProps, IState> {
     constructor(props: IProps) {
@@ -66,13 +40,12 @@ class PhotoCapture extends React.Component<IProps, IState> {
     public componentDidMount() {
         this.setState({ showText: true });
         setTimeout(() => this.setState({ static: true }), 5000);
-        setTimeout(() => this.setState({ openCamera: true, showText: false }), 7000);
+        setTimeout(() => this.setState({ openCamera: true, showText: false }), 5000);
     }
 
     public render() {
         return (
             <div className="ibm__ngv_main">
-                {stickMan(`${this.state.static ? 'static' : 'walk in'}`)}
                 <PoseGroup id="animated-form">
                     {this.state.openCamera &&
                         <Photo key="photo" className="ibm__photo_wrapper">
@@ -90,17 +63,13 @@ class PhotoCapture extends React.Component<IProps, IState> {
 
     private onTakePhoto = (dataUri: any) => {
         this.props.classify(dataUri);
-        this.props.saveData(dataUri)
-        const stickman = document.getElementById('stickman') as HTMLElement;
+        this.props.saveData(dataUri);
+        /*const stickman = document.getElementById('stickman') as HTMLElement;
         const input = document.getElementById('animated-form') as HTMLElement;
         stickman.classList.remove('wave')
         stickman.classList.add('walk', 'static');
-        input.classList.add('move', 'out');
-        setTimeout(() => {
-            stickman.classList.remove('static')
-            stickman.classList.add('out');
-        }, 5000);
-        setTimeout(() => history.push('/map'), 10000);
+        input.classList.add('move', 'out');*/
+        history.push('/map');
     }
 }
 export default PhotoCapture;
