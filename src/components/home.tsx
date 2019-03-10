@@ -3,7 +3,6 @@ import './home.css';
 import TextField from '@material-ui/core/TextField';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import history from 'src/history';
-//import { stickMan } from './stickman';
 
 interface IProps {
     setName: (name: string) => any;
@@ -69,24 +68,6 @@ class Home extends React.Component<IProps, IState> {
     private submitName = (event: any) => {
         event.preventDefault();
         this.props.setName(this.state.name);
-        /*const stickman = document.getElementById('stickman') as HTMLElement;
-        const text = document.getElementById('animated-text') as HTMLElement;
-        const input = document.getElementById('animated-form') as HTMLElement;
-        stickman.classList.add('walk', 'in');
-        setTimeout(() => {
-            stickman.classList.remove('walk', 'in');
-            stickman.classList.add('wave');
-        }, 5000);
-        setTimeout(() => {
-            stickman.classList.remove('wave')
-            stickman.classList.add('walk', 'static');
-            text.classList.add('move', 'out');
-            input.classList.add('move', 'out');
-        }, 7000);
-        setTimeout(() => {
-            stickman.classList.remove('static')
-            stickman.classList.add('out');
-        }, 12000);*/
         history.push('/photo');
     };
 }

@@ -2,12 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { IStoreState } from '../types';
+import { IStoreState, IClassification, IUser } from '../types';
 import { classify, setName, saveData } from '../actions/classify';
 import Home from 'src/components/home';
 import './App.css';
 import PhotoCapture from 'src/components/photo';
-import Map from 'src/components/map';
+import EmpathyMap from 'src/components/map';
 
 interface IDispatchProps {
   actions: {
@@ -17,10 +17,10 @@ interface IDispatchProps {
   };
 }
 interface IProps {
-  classification: any;
+  classification: IClassification;
   loading: boolean;
   router: any;
-  user: any;
+  user: IUser;
 }
 
 class App extends React.Component<IProps & IDispatchProps, {}> {
@@ -30,8 +30,8 @@ class App extends React.Component<IProps & IDispatchProps, {}> {
       <div id="root">
         <Switch>
           <Route exact={true} path="/" render={(props) => <Home {...props} setName={this.props.actions.setName} />} />
-          <Route exact={true} path="/photo" render={(props) => <PhotoCapture {...props} classify={this.props.actions.classify} saveData={this.props.actions.saveData}/>} />
-          <Route exact={true} path="/map" render={(props) => <Map {...props} classification={this.props.classification} loading={this.props.loading} user={this.props.user}/>} />
+          <Route exact={true} path="/photo" render={(props) => <PhotoCapture {...props} classify={this.props.actions.classify} saveData={this.props.actions.saveData} />} />
+          <Route exact={true} path="/map" render={(props) => <EmpathyMap {...props} classification={this.props.classification} loading={this.props.loading} user={this.props.user} />} />
         </Switch>
       </div>
     );

@@ -1,7 +1,8 @@
 import { CLASSIFY_IMAGE } from '../actions/classify';
 import { fulfilled, failed, pending } from '../lib/promiseMiddlewareTypes';
+import { IClassification } from 'src/types';
 
-/*const test = {
+const test = {
   minAge: 20,
   maxAge: 23,
   gender: 'female',
@@ -17,13 +18,13 @@ import { fulfilled, failed, pending } from '../lib/promiseMiddlewareTypes';
   openness: 'high',
   clothing: 'bohemian',
   competance: 85.71428571428571
-};*/
+};
 
-function classification(state = null, action: any): any {
+function classification(state = null, action: any): IClassification | null {
   switch (action.type) {
     case fulfilled(CLASSIFY_IMAGE):
-      return formatPayload(action.payload);
-      //return test;
+      return formatPayload(action.payload) as IClassification;
+    //return test;
     case pending(CLASSIFY_IMAGE):
       return null;
     case failed(CLASSIFY_IMAGE):
@@ -31,8 +32,8 @@ function classification(state = null, action: any): any {
       console.log('Could not classify image. Details:' + JSON.stringify(action.payload, null, 2));
       return null;
     default:
-      return null;
-      //return test;
+      //return state;
+      return test;
   }
 }
 

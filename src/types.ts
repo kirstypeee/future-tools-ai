@@ -14,7 +14,7 @@ export interface IPayload {
 
 export interface IUser {
     name: string;
-    imgData: string;
+    img: string;
 }
 
 export interface IClassification {
@@ -33,4 +33,10 @@ export interface IFeedback {
     sentiment: 'positive' | 'negative';
     sentence: string;
     associatedTrait: string;
+}
+
+export interface ISentiment {
+    sentence: string;
+    level: string;
+    key: string;
 }

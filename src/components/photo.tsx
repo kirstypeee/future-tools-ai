@@ -4,7 +4,6 @@ import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import history from 'src/history';
 import posed, { PoseGroup } from 'react-pose';
-//import { stickMan } from './stickman';
 
 interface IProps {
     classify: (imgFile: any) => any;
@@ -64,11 +63,6 @@ class PhotoCapture extends React.Component<IProps, IState> {
     private onTakePhoto = (dataUri: any) => {
         this.props.classify(dataUri);
         this.props.saveData(dataUri);
-        /*const stickman = document.getElementById('stickman') as HTMLElement;
-        const input = document.getElementById('animated-form') as HTMLElement;
-        stickman.classList.remove('wave')
-        stickman.classList.add('walk', 'static');
-        input.classList.add('move', 'out');*/
         history.push('/map');
     }
 }
